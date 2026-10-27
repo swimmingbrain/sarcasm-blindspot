@@ -12,6 +12,7 @@ A tweet like *"Great, another three hour delay!"* is full of positive words but 
 
 * Model: [Twitter RoBERTa Sentiment](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment) by Cardiff NLP, used as is without further training
 * Data: the sentiment and irony subsets of [TweetEval](https://github.com/cardiffnlp/tweeteval), plus a small set of sarcastic tweets we label by hand with their true sentiment
+* Bonus: at the end we might feed the model some of Chandler Bing's sarcastic lines from Friends, taken from [this paper](https://doi.org/10.22146/lexicon.v12i2.109306), to see if it gets them right
 
 ## Phases
 
