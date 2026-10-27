@@ -1,6 +1,6 @@
 # Sarcasm Blindspot
 
-Lab project for the AI and Visualization course at JKU, by team **Green Deranged Titans**.
+Lab project for the AI and Visualization course at JKU, by team **AI-West**.
 
 ## Idea
 
