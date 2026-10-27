@@ -1,0 +1,33 @@
+{
+    "team_name": "Green Deranged Titans",
+    "students": [
+        {
+            "student_id": "k12438455",
+            "first_name": "Cedric",
+            "last_name": "Hempe",
+            "email": "cedric.hempe@yahoo.de",
+            "github_user": "RubberTV"
+        },
+        {
+            "student_id": "k52211122",
+            "first_name": "Erik",
+            "last_name": "Ludescher",
+            "email": "e.e.ludescher@gmail.com",
+            "github_user": "ErikLudescher"
+        },
+        {
+            "student_id": "k52213163",
+            "first_name": "Braian",
+            "last_name": "Plaku",
+            "email": "braian.plaku@gmail.com",
+            "github_user": "swimmingbrain"
+        },
+        {
+            "student_id": "k51843919",
+            "first_name": "Lukas",
+            "last_name": "Steu",
+            "email": "lukas.steu1@gmail.com",
+            "github_user": "luki852"
+        }
+    ]
+}

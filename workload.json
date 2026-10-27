@@ -1,0 +1,25 @@
+{
+    "team_name": "Green Deranged Titans",
+    "students": [
+        {
+            "first_name": "Cedric",
+            "last_name": "Hempe",
+            "workload": 0.25
+        },
+        {
+            "first_name": "Erik",
+            "last_name": "Ludescher",
+            "workload": 0.25
+        },
+        {
+            "first_name": "Braian",
+            "last_name": "Plaku",
+            "workload": 0.25
+        },
+        {
+            "first_name": "Lukas",
+            "last_name": "Steu",
+            "workload": 0.25
+        }
+    ]
+}
