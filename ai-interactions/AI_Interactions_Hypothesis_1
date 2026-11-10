@@ -1,0 +1,61 @@
+# Phase I – AI Interaction Log (Team)
+
+*Concise reconstruction of the AI-assisted workflow behind our Python code, three visualizations, and PDF. The requests are paraphrased, not verbatim prompts. This focuses on the final irony-model investigation rather than providing a complete chat transcript.*
+
+### 1. Building the experiment
+
+**Our request:** “We want to use `cardiffnlp/twitter-roberta-base-irony` with the TweetEval irony dataset. Our hypothesis is that removing hashtags and emojis changes irony predictions. Can you write Python code to compare the predictions before and after removal? We were thinking about bar charts—what would you recommend?”
+
+**AI's response:** Generated code to evaluate all **784 test tweets**, record predicted labels and P(irony), and test four changes: remove hashtags, remove emojis, remove both, and remove just `#` while keeping the hashtag word.
+
+**What we kept:** The paired comparisons and saved CSV results.
+
+### 2. Choosing and improving the visualizations
+
+**Our request:** “These are too many plots, and the heatmap legend overlaps the data. Could we keep a simple before-and-after comparison and only one or two plots that give more detail?”
+
+**AI's response:** Suggested three figures: **stacked bars** for prediction distributions, **grouped bars** for the percentage of changed predictions, and a **dot plot** for changes in P(irony).
+
+**Our decision:** Keep these three plots, ask for a cleaner visual style, and have Python generate the final images.
+
+### 3. Checking our interpretation of the plots
+
+**Our request:** “Looking at the bars, we think removing hashtags changes some predictions, but the ironic and non-ironic groups don't seem very different. The emoji bars look a little more different, although they have fewer tweets. Is that a fair interpretation? Are we missing anything?”
+
+**AI's response:** Checked our interpretation against the CSV results: hashtag removal changed labels for **15.4%** of affected ironic tweets and **13.1%** of affected non-ironic tweets. The difference was **2.3 percentage points** (95% bootstrap interval **−3.4 to +8.0 points**), so it does not establish a clear group difference. Emoji removal affected just **33 ironic** and **55 non-ironic** tweets. AI also pointed out that P(irony) can change without changing the final label.
+
+**Our takeaway:** Keep the group comparison, but avoid claiming that irony-labelled tweets are clearly more sensitive.
+
+### 4. Checking what might explain the changes
+
+**Our follow-up request:** “Could the changes come from the words inside the hashtags rather than irony itself? For example, deleting `#not` also deletes ‘not.’ Could we test this separately?”
+
+**AI's response:** Compared whole-hashtag removal with a control that removes only `#`. It also found that **311/311 ironic tweets** and **113/473 non-ironic tweets** contained `#not`, `#irony`, or `#sarcasm`.
+
+**Our decision:** Mention hashtag content as a possible confounding factor. Removing a whole hashtag can change the tweet's meaning, so the results do not isolate the effect of the `#` symbol.
+
+### 5. Analyzing the three examples we chose
+
+**Our request:** “We want to use tweets **231, 307, and 622** as our three examples because they show different outcomes. Can you compare the original and modified text, prediction, and P(irony), and explain what we can learn from them?”
+
+**AI's response:** Checked the examples against the irony-model predictions:
+
+| Tweet | True label | Prediction before → after hashtag removal | P(irony) before → after |
+|---|---|---|---|
+| **231** | Ironic | Non-ironic → Ironic (incorrect → correct) | **18.7% → 95.9%** |
+| **307** | Ironic | Non-ironic → Ironic (incorrect → correct) | **22.9% → 94.0%** |
+| **622** | Non-ironic | Non-ironic → Ironic (correct → incorrect) | **14.6% → 98.3%** |
+
+**Our takeaway:** Hashtag removal can improve or worsen predictions. These examples are useful illustrations, but they do not prove what caused the changes.
+
+### 6. Turning our findings into the PDF
+
+**Our request:** “We have our **three final Python plots**. Can you make a clean four-page PDF using them? Please also include the findings we want to highlight: the small difference in hashtag-removal flip rates, the limited emoji sample, the importance of hashtag words, and our three examples. Put a short interpretation beside each plot and make the examples easy to compare visually.”
+
+**AI's response:** Organized the charts, our selected findings, and the example comparisons into a four-page report, then revised the example layout based on our feedback.
+
+**Our decision:** Use the final PDF as a compact presentation of our experiment, keeping the explanations focused on model behavior rather than overstating the evidence.
+
+### Brief reflection
+
+Our team defined the hypothesis, chose the three plots, challenged the initial interpretations, chose the example cases to discuss, and decided what to emphasize in the PDF. AI helped with Python implementation, visualization design, checking numerical interpretations, comparing the examples, and report formatting. The main benefit was faster iteration; the main lesson was to verify AI conclusions against the actual predictions and sample sizes.
