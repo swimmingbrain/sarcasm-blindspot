@@ -1,0 +1,55 @@
+# Phase I – AI Interaction Log (Team): Hypothesis #2
+
+*Concise reconstruction of the AI-assisted workflow behind our word-clustering analysis, follow-up experiments, visualizations, and report. The requests are paraphrased, not verbatim prompts. This log focuses on the Twitter-RoBERTa irony detector and the TweetEval irony test set.*
+
+### 1. Defining the word-clustering experiment
+
+**Our request:** “For hypothesis #2, we want to find groups of words that seem to belong together based on the model's behavior. What should we investigate, and how can we use the predictions from the irony test set?”
+
+**AI's response:** Suggested extracting words with `CountVectorizer` and calculating the average predicted P(irony) for tweets containing each word, separately for ironic and non-ironic tweets. It proposed K-means clustering and visualizing the results with a scatter plot and clustered heatmaps.
+
+**What we kept:** The word-level prediction statistics and the idea of clustering words by their associated model outputs. These clusters measure similarity in observed predictions, **not** similarity in the model's internal word representations.
+
+### 2. Implementing and debugging the analysis
+
+**Our request:** “How can we cluster the words from our CSV? How can we include more words, and why am I getting errors with `KMean` and `words`?”
+
+**AI's response:** Helped us load the exported data, corrected `KMean` to `KMeans`, defined the missing vocabulary and document-term matrix, and explained how `min_df`, stop-word filtering, and minimum occurrence counts affect the word list. It also showed how to export CSV files using semicolons so they open correctly in Excel.
+
+**Our decision:** Adjust the word filters and rerun the analysis rather than using the first code output unchanged. We later asked AI to simplify repeated calculations and organize the notebook more efficiently.
+
+### 3. Exploring the clusters and visualizations
+
+**Our request:** “Can we display a clustered heatmap and focus on words associated with high or low P(irony)? What do the six K-means clusters actually tell us?”
+
+**AI's response:** Generated scatter plots and heatmaps and helped interpret the six clusters. For example, words such as *great* and *love* grouped differently from *awesome* and *favorite*, even though all are positive expressions. Some words were associated with high predicted irony in both true classes, while others showed a larger difference between ironic and non-ironic contexts.
+
+**Our takeaway:** The clusters suggested different prediction patterns, but we could not conclude that the model internally groups these words together or that particular words directly cause the predictions. We decided to investigate the associations further.
+
+### 4. Comparing correct and incorrect predictions
+
+**Our request:** “Could we split the words into four groups: high or low P(irony) in genuinely ironic and non-ironic tweets? How can we compare these groups visually?”
+
+**AI's response:** Suggested grouping the tweets into true positives (TP), false positives (FP), false negatives (FN), and true negatives (TN), and comparing word prevalence across these groups in a heatmap. Our first strict probability thresholds (0.7 and 0.3) left only eight ironic tweets with low P(irony), so AI suggested using the 0.5 classification threshold for the four-way comparison.
+
+**Our decision:** Use the four prediction-outcome groups to identify candidate words associated with correct detections and mistakes. We also noted that a very small false-negative group makes word-frequency comparisons uncertain.
+
+### 5. Testing sensitivity to individual expressions and context
+
+**Our request:** “Do these results mean the model only looks at individual words? Can we test words like *great*, *perfect*, *love*, *awesome*, *thanks*, and *wonderful* in ironic and non-ironic sentences?”
+
+**AI's response:** Helped us create six paired sentence examples, run the irony model, and visualize P(irony) in a heatmap. All 12 initial sentences were predicted as ironic, including the intended non-ironic ones. AI then suggested comparing modified sentences without the characteristic expression and, separately, without punctuation, using changes in P(irony) as a sensitivity measure.
+
+**Our takeaway:** Individual expressions appeared to influence predictions, sometimes strongly, but the model also assigned high irony probabilities to several sentences after the expressions were removed. These small, constructed examples indicate sensitivity, not proof that the model ignores context. Removing a word can also change the meaning or irony of a sentence.
+
+### 6. Improving the code and preparing the results
+
+**Our request:** “Can you make the visualizations easier to compare, explain the findings, help us prepare a PDF like the other hypothesis report, and rewrite the notebook more efficiently?”
+
+**AI's response:** Suggested clearer heatmaps and plots of changes in P(irony), organized the findings into a Phase I report, and refactored repeated prediction calls and word-frequency calculations. It also proposed comparing mean model probabilities with the observed proportion of ironic tweets containing each word.
+
+**Our decision:** Keep visualizations that expose specific model behaviors rather than presenting only benchmark scores. We checked interpretations against the plotted values and noted limitations whenever comparisons could not isolate a word's causal influence.
+
+### Brief reflection
+
+Our group chose the word-clustering direction, adjusted the filtering thresholds, selected the words and sentence examples to test, and decided which findings were useful for the report. ChatGPT supported us with implementation, debugging, visualization ideas, interpretation, and notebook cleanup. It accelerated our work but sometimes produced errors or initially suggested interpretations stronger than the data justified. We learned that behavioral word clusters are not the same as internal model representations, and that controlled follow-up experiments and careful interpretation are necessary before making claims about how the model uses linguistic cues.
